@@ -1,0 +1,8 @@
+.borde-hover {
+      border-bottom: 2px solid transparent; /* Borde invisible por defecto */
+      transition: border-color 0.2s ease-in-out; /* Efecto suave */
+  }
+  .borde-hover:hover {
+      border-bottom-color: #0732ddaa !important; /* Rojo (danger) al hacer hover */
+      
+  }

@@ -1,0 +1,28 @@
+/* Un fondo con un degradado suave para que destaque el formulario */
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('https://i.ibb.co/KpyqRWwp/fondo-login.webp') no-repeat center;
+            background-size: cover;
+    background-position: center ;
+    height: 80vh;
+    
+        }
+        .registro-card {
+            max-width: 400px;
+            width: 100%;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
+        }
+        .btn-primario {
+            background-color: #616365;
+            color: white;
+            border-radius: 8px;
+        }
+
+        .btn-primario:hover {
+            background-color: #0066ff;
+            color: white;
+        }

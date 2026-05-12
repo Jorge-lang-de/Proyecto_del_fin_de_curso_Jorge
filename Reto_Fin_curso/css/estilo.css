@@ -1,0 +1,177 @@
+/* Estilos generales */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+/* Hero Section con imagen de fondo */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('https://i.ibb.co/nWYx4mf/portada.png');
+    background-size: cover;
+    background-position: center 30%;
+    height: 80vh;
+}
+
+.borde-hover {
+      border-bottom: 2px solid transparent; /* Borde invisible por defecto */
+      transition: border-color 0.2s ease-in-out; /* Efecto suave */
+  }
+  .borde-hover:hover {
+      border-bottom-color: #0732ddaa !important; /* Rojo (danger) al hacer hover */
+  }
+
+/* Efectos en las tarjetas */
+.card {
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card-img-top {
+    height: 250px;
+    object-fit: cover;
+}
+
+/* Botones y colores */
+.btn-primary {
+    background-color: #0066ff;
+    border: none;
+    padding: 0px 25px;
+}
+
+.text-primary {
+    color: #0066ff !important;
+}
+
+/* Suavizado de scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Contenedor de la imagen */
+.img-container-flip {
+    height: 250px;
+    perspective: 1000px;
+}
+
+.img-flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* Clase que activará el JS */
+.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.img-front, .img-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.img-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.img-back {
+    background-color: #0d6efd; /* Color al girar */
+    color: white;
+    transform: rotateY(180deg);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+/* Los botones se quedan quietos aquí */
+.card-badges {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10; /* Esto los mantiene por encima de la imagen y del fondo azul */
+    display: flex;
+    gap: 8px;
+    pointer-events: auto; /* Asegura que se puedan clicar */
+}
+
+.btn-badge {
+    background: white;
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    color: #0d6efd;
+    transition: transform 0.3s ease;
+}
+
+.btn-badge:hover {
+    transform: scale(1.1);
+}
+
+/* Animación de giro */
+.img-flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.img-front, .img-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.img-back {
+    background-color: #0d6efd;
+    color: white;
+    transform: rotateY(180deg);
+}
+
+/* Colores de botones activos */
+.active-like { background: #ff4757 !important; color: white !important; }
+.active-save { background: #ffffff !important; color: rgb(19, 7, 255) !important; }
+
+
+.img-container-flip:hover .img-flip-inner {
+    transform: rotateY(180deg);
+}
+
+/* Asegúrate de que los botones del corazón no giren con la imagen */
+/* Si quieres que el corazón se quede fijo mientras la imagen gira detrás: */
+.card-badges {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 20; /* Más alto que el flip */
+    pointer-events: auto; 
+}
+
+
+
+
+
+

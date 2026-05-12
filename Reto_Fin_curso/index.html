@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InmoLuxury | Tu próximo hogar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/mrMn6wPS/logo.png">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">INMO<span class="text-primary">LUXURY</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a id="enlaceSesion" class="nav-link text-white fw-bold borde-hover px-3" href="html/login.html">Inicio Sesión</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold borde-hover px-3" href="#propiedades">Propiedades</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold borde-hover px-3" href="#contacto">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold borde-hover px-3" href="html/favoritos.html">Favoritos</a></li>
+                    <li class="nav-item">
+    <a id="btnCerrarSesion" class="nav-link text-danger fw-bold px-3" href="#" style="display: none;">(Cambiar de usuario)</a>
+</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. Buscamos si hay un nombre guardado
+        const nombreGuardado = localStorage.getItem('usuarioNombre');
+        
+        // 2. Seleccionamos el enlace del menú
+        const enlace = document.getElementById('enlaceSesion');
+
+        // 3. Si existe el nombre, cambiamos el texto
+        if (nombreGuardado && enlace) {
+            enlace.textContent = "Hola, " + nombreGuardado;
+            enlace.href = "#"; // Evitamos que vuelva a la página de login
+            
+            // Opcional: Estilo extra para que resalte que es el usuario
+            enlace.classList.add('text-primary');
+            enlace.classList.remove('text-white');
+        }
+    });
+
+    // Lógica para el botón de "Cambiar de usuario"
+    document.addEventListener('DOMContentLoaded', function() {
+        // Buscamos el nombre guardado y los elementos del menú
+        const nombreGuardado = localStorage.getItem('usuarioNombre');
+        // Seleccionamos el enlace del menú y el botón de cerrar sesión
+        const enlace = document.getElementById('enlaceSesion');
+        const btnCerrar = document.getElementById('btnCerrarSesion');
+        // Si hay un nombre guardado, mostramos el enlace personalizado y el botón de cerrar sesión
+        if (nombreGuardado && enlace) {
+            // 1. Mostramos el nombre
+            enlace.textContent = "Hola, " + nombreGuardado;
+            enlace.href = "#";
+            // Opcional: Estilo para resaltar el nombre del usuario
+            enlace.classList.add('text-primary');
+            enlace.classList.remove('text-white');
+
+            // 2. Mostramos el botón de Salir
+            if (btnCerrar) {
+                btnCerrar.style.display = "block";
+            }
+        }
+
+        // 3. Lógica para cambiar de usuario (Cerrar Sesión)
+        if (btnCerrar) {
+            btnCerrar.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Borramos solo el nombre del usuario
+                localStorage.removeItem('usuarioNombre');
+                // borramos TODO (incluyendo favoritos), usa localStorage.clear();
+                
+                // Recargamos la página para que el menú vuelva a su estado original
+                window.location.reload();
+            });
+        }
+    });
+</script>
+
+    <header id="inicio" class="hero-section text-white d-flex align-items-center">
+        <div class="container text-center">
+            <h1 class="display-3 fw-bold">Encuentra el hogar de tus sueños</h1>
+            <p class="lead">Las mejores propiedades en las zonas más exclusivas de la ciudad.</p>
+            <a href="#propiedades" class="btn btn-primary btn-lg mt-3">Ver Catálogo</a>
+        </div>
+    </header>
+
+    <section id="propiedades" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold">Propiedades Destacadas</h2>
+        <div class="row g-4">
+            
+            <!-- cuando pulsas el corazon de cada tarjeta, se guardan los datos de esa propiedad en el localStorage -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 overflow-hidden">
+                    <div class="img-container-flip">
+                        <div class="card-badges">
+                        <button class="btn-badge like-btn"
+                            data-id="1"
+                            data-titulo="Villa Moderna"
+                            data-precio="1.950.000€"
+                            data-img="imagenes/mansion.jpg"
+                            data-ubicacion="Beverly Hills, CA"
+                            data-hab="6 Hab"
+                            data-banos="3 Banos"
+                            data-metros="450m²"
+                            data-link="html/casa1.html">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                            
+                        </div>
+                        <div class="img-flip-inner">
+                            <div class="img-front">
+                                <img src="https://i.ibb.co/HLqCmKPC/mansion.jpg" class="w-100 h-100" style="object-fit: cover;">
+                                
+                            </div>
+                            <div class="img-back d-flex align-items-center justify-content-center p-3 text-center">
+                                <div>
+                                    <h6 class="fw-bold">Villa de Lujo</h6>
+                                    <p class="small mb-0">Piscina privada, vistas a Madrid, jardín, terraza, WIFI y aparcamiento exclusivo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body px-4 py-4">
+                        <h4 class="card-title fw-bold mb-2">Villa Moderna</h4>
+                        <p class="text-muted mb-4"><i class="bi bi-geo-alt"></i> Madrid</p>
+                        <div class="row text-primary fw-semibold mb-4">
+                            <div class="col-4 small"><i class="bi bi-door-open"></i> 6 Hab</div>
+                            <div class="col-4 small text-center"><i class="bi bi-droplet"></i> 3 Baños</div>
+                            <div class="col-4 small text-end"><i class="bi bi-arrows-fullscreen"></i> 450m²</div>
+                        </div>
+                        <h3 class="fw-bold mb-3 text-dark">1.950.000€</h3>
+                       <a href="html/casa1.html"> <button class="btn btn-outline-primary w-100 py-2 rounded-3">Más detalles</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 overflow-hidden">
+                    <div class="img-container-flip">
+                        <div class="card-badges">
+                            <button class="btn-badge like-btn"
+                                data-id="2"
+                                data-titulo="Villa Serenity"
+                                data-precio="780.000€"
+                                data-img="imagenes/chalet.jpg"
+                                data-ubicacion="Alicante"
+                                data-hab="3 Hab"
+                                data-banos="2 Banos"
+                                data-metros="210m²"
+                                data-link="html/casa2.html">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                        </div>
+                        <div class="img-flip-inner">
+                            <div class="img-front">
+                                <img src="https://i.ibb.co/TDTRnZjt/chalet.jpg" class="w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <div class="img-back d-flex align-items-center justify-content-center p-3 text-center">
+                                <div>
+                                    <h6 class="fw-bold">Atico Exclusivo</h6>
+                                    <p class="small mb-0">Ubicación céntrica con piscina, jardin, terraza, WIFI y aparcamiento exclusivo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body px-4 py-4">
+                        <h4 class="card-title fw-bold mb-2">Villa Serenity</h4>
+                        <p class="text-muted mb-4"><i class="bi bi-geo-alt"></i> Alicante</p>
+                        <div class="row text-primary fw-semibold mb-4">
+                            <div class="col-4 small"><i class="bi bi-door-open"></i> 3 Hab</div>
+                            <div class="col-4 small text-center"><i class="bi bi-droplet"></i> 2 Baños</div>
+                            <div class="col-4 small text-end"><i class="bi bi-arrows-fullscreen"></i> 210m²</div>
+                        </div>
+                        <h3 class="fw-bold mb-3 text-dark">780.000€</h3>
+                        <a href="html/casa2.html"> <button class="btn btn-outline-primary w-100 py-2 rounded-3">Más detalles</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 overflow-hidden">
+                    <div class="img-container-flip">
+                        <div class="card-badges">
+                            <button class="btn-badge like-btn"
+                        data-id="3"
+                        data-titulo="Casa del paraíso"
+                        data-precio="820.000€"
+                        data-img="imagenes/chalet2.jpg"
+                        data-ubicacion="Marbella"
+                        data-hab="4 Hab"
+                        data-banos="2 Banos"
+                        data-metros="280m²"
+                        data-link="html/casa3.html">
+                    <i class="bi bi-heart"></i>
+                </button>
+                            
+                        </div>
+                        <div class="img-flip-inner">
+                            <div class="img-front">
+                                <img src="https://i.ibb.co/nsYC5zLh/chalet2.jpg" class="w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <div class="img-back d-flex align-items-center justify-content-center p-3 text-center">
+                                <div>
+                                    <h6 class="fw-bold">Retiro Natural</h6>
+                                    <p class="small mb-0">Estilo minimalista rodeado de bosque.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body px-4 py-4">
+                        <h4 class="card-title fw-bold mb-2">Casa del paraiso</h4>
+                        <p class="text-muted mb-4"><i class="bi bi-geo-alt"></i> Marbella</p>
+                        <div class="row text-primary fw-semibold mb-4">
+                            <div class="col-4 small"><i class="bi bi-door-open"></i> 4 Hab</div>
+                            <div class="col-4 small text-center"><i class="bi bi-droplet"></i> 2 Baños</div>
+                            <div class="col-4 small text-end"><i class="bi bi-arrows-fullscreen"></i> 280m²</div>
+                        </div>
+                        <h3 class="fw-bold mb-3 text-dark">820.000€</h3>
+                        <a href="html/casa3.html"><button class="btn btn-outline-primary w-100 py-2 rounded-3">Más detalles</button></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <section id="propiedades" class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 overflow-hidden">
+                    <div class="img-container-flip">
+                        <div class="card-badges">
+                            <button class="btn-badge like-btn"
+                        data-id="4"
+                        data-titulo="Villa Alegre"
+                        data-precio="950.000€"
+                        data-img="imagenes/chalet3.jpg"
+                        data-ubicacion="Murcia"
+                        data-hab="4 Hab"
+                        data-banos="3 Banos"
+                        data-metros="250m²"
+                        data-link="html/casa4.html">
+                    <i class="bi bi-heart"></i>
+                </button>
+                            
+                        </div>
+                        <div class="img-flip-inner">
+                            <div class="img-front">
+                                <img src="https://i.ibb.co/h017gjN/chalet3.jpg" class="w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <div class="img-back d-flex align-items-center justify-content-center p-3 text-center">
+                                <div>
+                                    <h6 class="fw-bold">Villa de Lujo</h6>
+                                    <p class="small mb-0">Piscina privada y acabados premium.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body px-4 py-4">
+                        <h4 class="card-title fw-bold mb-2">Villa alegre</h4>
+                        <p class="text-muted mb-4"><i class="bi bi-geo-alt"></i> Murcia</p>
+                        <div class="row text-primary fw-semibold mb-4">
+                            <div class="col-4 small"><i class="bi bi-door-open"></i> 4 Hab</div>
+                            <div class="col-4 small text-center"><i class="bi bi-droplet"></i> 3 Baños</div>
+                            <div class="col-4 small text-end"><i class="bi bi-arrows-fullscreen"></i> 250m²</div>
+                        </div>
+                        <h3 class="fw-bold mb-3 text-dark">950.000€</h3>
+                        <a href="html/casa4.html"><button class="btn btn-outline-primary w-100 py-2 rounded-3">Más detalles</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 overflow-hidden">
+                    <div class="img-container-flip">
+                        <div class="card-badges">
+                            <button class="btn-badge like-btn"
+                        data-id="5"
+                        data-titulo="Villa Morena"
+                        data-precio="880.000€"
+                        data-img="imagenes/chalet4.jpg"
+                        data-ubicacion="Murcia"
+                        data-hab="2 Hab"
+                        data-banos="2 Banos"
+                        data-metros="280m²"
+                        data-link="html/casa5.html">
+                    <i class="bi bi-heart"></i>
+                </button>
+                        </div>
+                        <div class="img-flip-inner">
+                            <div class="img-front">
+                                <img src="https://i.ibb.co/Txx7D38D/chalet4.jpg" class="w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <div class="img-back d-flex align-items-center justify-content-center p-3 text-center">
+                                <div>
+                                    <h6 class="fw-bold">Atico Exclusivo</h6>
+                                    <p class="small mb-0">casa con piscina y sitio tranquilo con vistas al mar</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body px-4 py-4">
+                        <h4 class="card-title fw-bold mb-2">Villa Morena</h4>
+                        <p class="text-muted mb-4"><i class="bi bi-geo-alt"></i> Murcia</p>
+                        <div class="row text-primary fw-semibold mb-4">
+                            <div class="col-4 small"><i class="bi bi-door-open"></i> 2 Hab</div>
+                            <div class="col-4 small text-center"><i class="bi bi-droplet"></i> 2 Baños</div>
+                            <div class="col-4 small text-end"><i class="bi bi-arrows-fullscreen"></i> 280m²</div>
+                        </div>
+                        <h3 class="fw-bold mb-3 text-dark">880.000€</h3>
+                        <a href="html/casa5.html"><button class="btn btn-outline-primary w-100 py-2 rounded-3">Más detalles</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 overflow-hidden">
+                    <div class="img-container-flip">
+                        <div class="card-badges">
+                            <button class="btn-badge like-btn"
+                        data-id="6"
+                        data-titulo="Valle del Conejo"
+                        data-precio="920.000€"
+                        data-img="imagenes/chalet6.webp"
+                        data-ubicacion="Gran Canarias"
+                        data-hab="3 Hab"
+                        data-banos="2 Banos"
+                        data-metros="180m²"
+                        data-link="html/casa6.html">
+                    <i class="bi bi-heart"></i>
+                </button>
+                        </div>
+                        <div class="img-flip-inner">
+                            <div class="img-front">
+                                <img src="https://i.ibb.co/B5nQRx6n/chalet6.webp" class="w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <div class="img-back d-flex align-items-center justify-content-center p-3 text-center">
+                                <div>
+                                    <h6 class="fw-bold">Retiro Natural</h6>
+                                    <p class="small mb-0">Casa cueva en la montaña al estilo rural canario</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body px-4 py-4">
+                        <h4 class="card-title fw-bold mb-2">Valle del Conejo</h4>
+                        <p class="text-muted mb-4"><i class="bi bi-geo-alt"></i> Gran Canarias</p>
+                        <div class="row text-primary fw-semibold mb-4">
+                            <div class="col-4 small"><i class="bi bi-door-open"></i> 3 Hab</div>
+                            <div class="col-4 small text-center"><i class="bi bi-droplet"></i> 2 Baños</div>
+                            <div class="col-4 small text-end"><i class="bi bi-arrows-fullscreen"></i> 180m²</div>
+                        </div>
+                        <h3 class="fw-bold mb-3 text-dark">920.000€</h3>
+                        <a href="html/casa6.html"><button class="btn btn-outline-primary w-100 py-2 rounded-3">Más detalles</button></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    
+
+    <footer id="contacto" class="bg-dark text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 mb-4">
+                <h2 class="fw-bold display-5">Hablemos</h2>
+                <p class="text-secondary">¿Tienes alguna duda sobre una propiedad? Envíanos un mensaje directo.</p>
+                <div class="mt-4">
+                    <p><i class="bi bi-telephone text-primary me-2"></i> +34 633 518 290</p>
+                    <p><i class="bi bi-envelope text-primary me-2"></i> soporte@inmoluxury.com</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label small text-secondary">Escribe tu consulta:</label>
+                        <textarea class="form-control bg-white border-0" rows="5" placeholder="¿En qué podemos ayudarte hoy?"></textarea>
+                    </div>
+                    <button class="btn btn-primary w-100 py-2 fw-bold" type="submit">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+        <hr class="mt-5 opacity-25">
+        <p class="text-center mb-0 small text-secondary">2026 InmoLuxury. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/js.js"></script>
+    
+</body>
+</html>

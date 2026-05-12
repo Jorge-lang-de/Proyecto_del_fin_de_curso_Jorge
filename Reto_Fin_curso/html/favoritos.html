@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Favoritos | InmoLuxury</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/favoritos.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/mrMn6wPS/logo.png">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <div class="container"><a class="navbar-brand fw-bold" href="../index.html">INMO<span class="text-primary">LUXURY</span></a>
+            <ul class="navbar-nav flex-row">
+                <li class="nav-item"><a class="nav-link text-white fw-bold borde-hover px-3" href="../index.html">Inicio</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="fw-bold mb-4">Mis Casas Favoritas</h2>
+        <div id="lista-favoritos" class="row g-4">
+            </div>
+    </div>
+
+    <script>
+        // Seleccionamos el contenedor donde se mostrarán los favoritos
+    const contenedor = document.getElementById('lista-favoritos');
+        // Función para mostrar los favoritos
+    function mostrarFavoritos() {
+        const favoritos = JSON.parse(localStorage.getItem('misFavoritos')) || [];
+        console.log("Casas encontradas:", favoritos); // Esto te dirá en la consola si hay datos
+        // Si no hay favoritos, mostramos un mensaje y salimos de la función
+        if (favoritos.length === 0) {
+            contenedor.innerHTML = '<h3 class="text-center mt-5">No hay casas en tu lista.</h3>';
+            return;
+        }
+        // Limpiamos el contenedor antes de mostrar los favoritos
+        contenedor.innerHTML = '';
+
+        // Recorremos cada casa en favoritos y la mostramos
+        favoritos.forEach(function(casa) {
+            // Si falta algún dato, ponemos un texto por defecto para que no se rompa el diseño
+            const hab = casa.hab || "N/A";
+            const banos = casa.banos || "N/A";
+            const metros = casa.metros || "N/A";
+            const link = casa.link ? casa.link.replace('html/', '') : '#';
+            // Agregamos el HTML de cada casa al contenedor
+            contenedor.innerHTML += `
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="../${casa.img}" class="card-img-top" style="height:200px; object-fit:cover;">
+                        <div class="card-body">
+                            <h4 class="fw-bold">${casa.titulo}</h4>
+                            <p class="text-muted mb-3"><i class="bi bi-geo-alt"></i> ${casa.ubicacion}</p>
+                            
+                            <div class="row text-primary fw-semibold mb-3">
+                                <div class="col-4 small text-center"><i class="bi bi-door-open"></i> ${hab}</div>
+                                <div class="col-4 small text-center"><i class="bi bi-droplet"></i> ${banos}</div>
+                                <div class="col-4 small text-center"><i class="bi bi-arrows-fullscreen"></i> ${metros}</div>
+                            </div>
+
+                            <h3 class="fw-bold text-dark">${casa.precio}</h3>
+                            
+                            <div class="d-grid gap-2 mt-3">
+                                <a href="${link}" class="btn btn-outline-primary py-2">Más detalles</a>
+                                <button class="btn btn-danger py-2" onclick="eliminar('${casa.id}')">
+                                    <i class="bi bi-trash"></i> Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+        });
+    }
+    // Función para eliminar un favorito por su ID
+    function eliminar(id) {
+        // Obtenemos la lista actual de favoritos, filtramos para eliminar el que tiene el ID dado, y guardamos la nueva lista
+        let favoritos = JSON.parse(localStorage.getItem('misFavoritos'));
+        // Si no hay favoritos, no hacemos nada
+        let nuevaLista = favoritos.filter(item => item.id !== id);
+        // Guardamos la nueva lista sin el elemento eliminado
+        localStorage.setItem('misFavoritos', JSON.stringify(nuevaLista));
+        mostrarFavoritos();
+    }
+
+    // Ejecutar al cargar
+    window.onload = mostrarFavoritos;
+    
+</script>
+</body>
+</html>
